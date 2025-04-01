@@ -28,7 +28,10 @@ class Assembler{
             foreach(string s in data){
                 Console.Write(s + " ");
             }
-            Console.Write('\n');
+
+            if(data.Count > 0){
+                Console.Write('\n');
+            }
         }
     }
 }

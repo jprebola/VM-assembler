@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Xml;
-// test commit 
+
 class Assembler{
     public static void Main(string[] args){
         StreamReader sr;

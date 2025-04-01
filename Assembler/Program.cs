@@ -40,6 +40,7 @@ class Assembler{
                     break;
                 }
             }
+            //DONT FUCKING FORGET HANDLING STPUSH W/ numInstructions
 
             //if we are parsing an instruction then increase instruction counter
             if(isInstruction && data.Count > 0){

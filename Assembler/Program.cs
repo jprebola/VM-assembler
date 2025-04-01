@@ -17,18 +17,11 @@ class Assembler{
 
         while((line = sr.ReadLine()) != null){
             List<string> data = line.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
-            bool commentDrop = false;
 
             for(int i = 0; i < data.Count; i++){
-                if(commentDrop == true){
-                    data.RemoveAt(i);
-                    i--;
-                }
-
                 if(data[i].Contains('#')){
-                    commentDrop = true;
-                    data.RemoveAt(i);
-                    i--;
+                    data.RemoveRange(i, data.Count - i);
+                    break;
                 }
             }
 

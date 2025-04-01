@@ -12,3 +12,4 @@ C:\Users\justi\OneDrive\Desktop\VM assembler\Assembler\obj\Debug\net9.0\refint\A
 C:\Users\justi\OneDrive\Desktop\VM assembler\Assembler\obj\Debug\net9.0\Assembler.pdb
 C:\Users\justi\OneDrive\Desktop\VM assembler\Assembler\obj\Debug\net9.0\Assembler.genruntimeconfig.cache
 C:\Users\justi\OneDrive\Desktop\VM assembler\Assembler\obj\Debug\net9.0\ref\Assembler.dll
+C:\Users\justi\OneDrive\Desktop\VM assembler\Assembler\obj\Debug\net9.0\Assembler.sourcelink.json

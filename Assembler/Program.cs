@@ -23,12 +23,14 @@ class Assembler{
 
         while((line = sr.ReadLine()) != null){
             List<string> data = line.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
+            bool isInstruction = true;
             
             //check for label
             if(data.Count == 1 && data[0].Contains(':')){
                 //remove ':' from the name and store label info in dictionary
                 data[0].Remove(data[0].Length - 1, 1);
                 labels[data[0]] = ((int)lines, (int)numInstructions * 4);
+                isInstruction = false;
             }
 
             //Check for comment
@@ -38,7 +40,11 @@ class Assembler{
                     break;
                 }
             }
-            
+
+            //if we are parsing an instruction then increase instruction counter
+            if(isInstruction && data.Count > 0){
+                numInstructions++;
+            }
             lines++;
         }
 

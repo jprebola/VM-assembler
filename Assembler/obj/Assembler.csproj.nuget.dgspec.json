@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/tylergarriott/Desktop/Computer science/cosc365/csharp/VM-assembler/Assembler/Assembler.csproj": {}
+    "C:\\Users\\justi\\OneDrive\\Desktop\\VM assembler\\Assembler\\Assembler.csproj": {}
   },
   "projects": {
-    "/Users/tylergarriott/Desktop/Computer science/cosc365/csharp/VM-assembler/Assembler/Assembler.csproj": {
+    "C:\\Users\\justi\\OneDrive\\Desktop\\VM assembler\\Assembler\\Assembler.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/tylergarriott/Desktop/Computer science/cosc365/csharp/VM-assembler/Assembler/Assembler.csproj",
+        "projectUniqueName": "C:\\Users\\justi\\OneDrive\\Desktop\\VM assembler\\Assembler\\Assembler.csproj",
         "projectName": "Assembler",
-        "projectPath": "/Users/tylergarriott/Desktop/Computer science/cosc365/csharp/VM-assembler/Assembler/Assembler.csproj",
-        "packagesPath": "/Users/tylergarriott/.nuget/packages/",
-        "outputPath": "/Users/tylergarriott/Desktop/Computer science/cosc365/csharp/VM-assembler/Assembler/obj/",
+        "projectPath": "C:\\Users\\justi\\OneDrive\\Desktop\\VM assembler\\Assembler\\Assembler.csproj",
+        "packagesPath": "C:\\Users\\justi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\justi\\OneDrive\\Desktop\\VM assembler\\Assembler\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/tylergarriott/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\justi\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

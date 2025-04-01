@@ -1,4 +1,8 @@
-push 10
-   push 10
-#dis line a comment fr
-  blkjag rr        er er   #comment  err ereer
+# This is a comment for the entire line
+start:
+
+    goto main
+main:
+    exit 0
+
+done:

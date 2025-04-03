@@ -24,7 +24,7 @@ public class Push : IInstruction {
 public class Pop : IInstruction {
     private readonly uint _offset;
     public Pop(uint offset){
-        _offset = offset;
+        _offset = offset & ~0b11;
     }
     public int Encode(){
         return (1 << 28) | ((int)_offset & 0x0FFFFFFF);
@@ -71,3 +71,19 @@ public class Return : IInstruction {
     }
 }
 
+public class Goto : IInstruction {
+    private readonly int _reloffset;
+    public Goto(int reloffset){
+        _reloffset = reloffset & ~0b11;
+    }
+    public int Encode(){
+        return (0b0111 << 28) | (_reloffset & 0x0FFFFFFF);
+    }
+}
+
+public class Dump : IInstruction {
+    public Dump() {}
+    public int Encode(){
+        return 0b110 << 28;
+    }
+}

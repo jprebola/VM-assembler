@@ -30,3 +30,34 @@ public class Exit : IInstruction {
         return (0b0 << 30) | _code;
     }
 }
+
+public class Stprint : IInstruction {
+    private readonly int _offset;
+    public Stprint(int offset){
+        _offset = offset;
+    }
+    public int Encode(){
+        return (0b0100 << 28) | (_offset & ~0b11);
+    }
+}
+
+public class Call : IInstruction {
+    private readonly int _offset;
+    public Call(int offset){
+        _offset = offset;
+    }
+    public int Encode(){
+        return (0b0101 << 28) | (_offset & ~0b11);
+    }
+}
+
+public class Return : IInstruction {
+    private readonly int _offset;
+    public Return(int offset){
+        _offset = offset;
+    }
+    public int Encode(){
+        return (0b0110 << 28) | (_offset & ~0b11);
+    }
+}
+

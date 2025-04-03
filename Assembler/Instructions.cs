@@ -14,7 +14,7 @@ public class Push : IInstruction {
     public Push(int value){
         _value = value;
     }
-    public int push(int value) {
+    public int Encode() {
         int opcode = 0b1111 << 28;
         int masked = _value & 0x0FFFFFFF; // Keep lower 28 bits
         return opcode | masked;

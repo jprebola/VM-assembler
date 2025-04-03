@@ -10,6 +10,10 @@ class Assembler{
         string? line;
         List<IInstruction> instructions = new List<IInstruction>();
 
+        if(args.Length < 2){
+            Console.WriteLine("Usage: assemble <file.asm> <file.v>");
+        }
+
         try{
             sr = new StreamReader(args[0]);
         }
@@ -41,18 +45,17 @@ class Assembler{
                     break;
                 }
             }
+            //DONT FUCKING FORGET HANDLING STPUSH W/ numInstructions
 
             if(data.Count > 0 && data[0].StartsWith("if")){
-                data[0].Remove(0, 2);
-                data.Insert(0, "if");
-            }
-
-            if(data.Count > 0 && data[0].StartsWith("print") && data[0].Length > 5){
-                data[0].Remove(0, 2);
-                data.Insert(0, "print");
-            }
-
-            //DONT FUCKING FORGET HANDLING STPUSH W/ numInstructions
+                 data[0].Remove(0, 2);
+                 data.Insert(0, "if");
+             }
+ 
+             if(data.Count > 0 && data[0].StartsWith("print") && data[0].Length > 5){
+                 data[0].Remove(0, 2);
+                 data.Insert(0, "print");
+             }
 
             //if we are parsing an instruction then increase instruction counter
             if(isInstruction && data.Count > 0){
@@ -186,11 +189,13 @@ class Assembler{
                 }else{
                 //get string length to calc # of pushes needed for PC and IInstruction list
 
-                    Console.WriteLine("STPUSH FOUND");
+                Console.WriteLine("STPUSH FOUND");
                 }   
             }
             lines++;
         }
     }
 }
+
+
 

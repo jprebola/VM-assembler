@@ -21,6 +21,16 @@ public class Push : IInstruction {
     }
 }
 
+public class Pop : IInstruction {
+    private readonly uint _offset;
+    public Pop(uint offset){
+        _offset = offset;
+    }
+    public int Encode(){
+        return (1 << 28) | ((int)_offset & 0x0FFFFFFF);
+    }
+}
+
 public class Exit : IInstruction {
     private readonly int _code;
     public Exit(int code){

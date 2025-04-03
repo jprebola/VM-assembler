@@ -10,9 +10,13 @@ public class Dup : IInstruction {
 }
 
 public class Push : IInstruction {
+    private readonly int _value;
+    public Push(int value){
+        _value = value;
+    }
     public int push(int value) {
         int opcode = 0b1111 << 28;
-        int masked = value & 0x0FFFFFFF; // Keep lower 28 bits
+        int masked = _value & 0x0FFFFFFF; // Keep lower 28 bits
         return opcode | masked;
     }
 }

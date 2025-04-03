@@ -3,6 +3,7 @@ using System.IO;
 using System.Xml;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 class Assembler{
     public static void Main(string[] args){
@@ -193,6 +194,24 @@ class Assembler{
                 }   
             }
             lines++;
+        }
+
+        using (var stream = File.Open(args[1], FileMode.Create))
+        {
+            using (var writer = new BinaryWriter(stream))
+            {
+                writer.Write(0xDEADBEEF);
+                foreach(var i in instructions){
+                    writer.Write(i.Encode());
+                }
+
+                if(instructions.Count % 4 != 0){
+                    int nop = (0b0 << 31) & (0b1 << 25);
+                    for(int i = 0; i < 4 - (instructions.Count % 4); i++){
+                        writer.Write(nop);
+                    }
+                }
+            }
         }
     }
 }

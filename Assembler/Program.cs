@@ -171,13 +171,12 @@ class Assembler{
                             Console.WriteLine("Invalid Instruction: " + data[0]);
                             break;
                     }
-
+                    numInstructions++;
                 }else{
                 //get string length to calc # of pushes needed for PC and IInstruction list
 
                 Console.WriteLine("STPUSH FOUND");
                 }   
-                numInstructions++;
             }
             lines++;
         }

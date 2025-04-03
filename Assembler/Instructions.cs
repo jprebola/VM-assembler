@@ -7,3 +7,13 @@ public class Dup : IInstruction {
         return (0b1100 << 28) | _offset;
     }
 }
+
+public class Exit : IInstruction {
+    private readonly int _code;
+    public Exit(int code){
+        _code = code;
+    }
+    public int Encode(){
+        return (0b0000 << 28) | _code;
+    }
+}

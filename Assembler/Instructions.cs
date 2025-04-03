@@ -20,9 +20,9 @@ public class Push : IInstruction {
 public class Exit : IInstruction {
     private readonly int _code;
     public Exit(int code){
-        _code = code;
+        _code = code & 0xF;
     }
     public int Encode(){
-        return (0b0000 << 28) | _code;
+        return (0b0 << 30) | _code;
     }
 }

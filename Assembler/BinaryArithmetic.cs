@@ -14,7 +14,7 @@ public class Sub : IInstruction {
         _tag = 1;
     }
     public int Encode() {
-        return (0b0010 << 28) | _tag;
+        return (0b0010 << 28) | (_tag << 24);
     }
 }
 
@@ -24,7 +24,7 @@ public class Mul : IInstruction {
         _tag = 2;
     }
     public int Encode() {
-        return (0b0010 << 28) | _tag;
+        return (0b0010 << 28) | (_tag << 24);
     }
 }
 
@@ -34,7 +34,7 @@ public class Div : IInstruction {
         _tag = 3;
     }
     public int Encode() {
-        return (0b0010 << 28) | _tag;
+        return (0b0010 << 28) | (_tag << 24);
     }
 }
 
@@ -44,7 +44,7 @@ public class Rem : IInstruction {
         _tag = 4;
     }
     public int Encode() {
-        return (0b0010 << 28) | _tag;
+        return (0b0010 << 28) | (_tag << 24);
     }
 }
 
@@ -54,7 +54,7 @@ public class And : IInstruction {
         _tag = 5;
     }
     public int Encode() {
-        return (0b0010 << 28) | _tag;
+        return (0b0010 << 28) | (_tag << 24);
     }
 }
 
@@ -64,7 +64,7 @@ public class Or : IInstruction {
         _tag = 6;
     }
     public int Encode() {
-        return (0b0010 << 28) | _tag;
+        return (0b0010 << 28) | (_tag << 24);
     }
 }
 
@@ -74,7 +74,7 @@ public class Xor : IInstruction {
         _tag = 7;
     }
     public int Encode() {
-        return (0b0010 << 28) | _tag;
+        return (0b0010 << 28) | (_tag << 24);
     }
 }
 
@@ -84,7 +84,7 @@ public class Lsl : IInstruction {
         _tag = 8;
     }
     public int Encode() {
-        return (0b0010 << 28) | _tag;
+        return (0b0010 << 28) | (_tag << 24);
     }
 }
 
@@ -94,7 +94,7 @@ public class Lsr : IInstruction {
         _tag = 9;
     }
     public int Encode() {
-        return (0b0010 << 28) | _tag;
+        return (0b0010 << 28) | (_tag << 24);
     }
 }
 
@@ -104,7 +104,7 @@ public class Asr : IInstruction {
         _tag = 11;
     }
     public int Encode() {
-        return (0b0010 << 28) | _tag;
+        return (0b0010 << 28) | (_tag << 24);
     }
 }
 

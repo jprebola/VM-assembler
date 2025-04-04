@@ -135,7 +135,15 @@ class Assembler{
                     case "pop":
                         Pop pop;
                         if(data.Count > 1){
-                            int offset = Int32.Parse(data[1]);
+                            int offset;
+                            if(data[1].StartsWith("0x") || data[1].StartsWith("0X")){
+                                //parse as hex
+                                offset = Convert.ToInt32(data[1].Substring(2), 16);
+                            } else {
+                                //parse as decimal
+                                offset = Int32.Parse(data[1]);
+                            }
+                            
                             if(offset < 0){
                                 Console.WriteLine($"{lines}: offset to pop() is negative.");
                                 return;
@@ -298,7 +306,13 @@ class Assembler{
                         Push push;
 
                         if(data.Count > 1){
-                            push = new Push(Int32.Parse(data[1]));
+                            if(data[1].StartsWith("0x") || data[1].StartsWith("0X")){
+                                //parse hex
+                                push = new Push(Convert.ToInt32(data[1].Substring(2), 16));
+                            } else {
+                                //parse decimal
+                                push = new Push(Int32.Parse(data[1]));
+                            }
                             instructions.Add(push);
                         }else{
                             push = new Push(0);

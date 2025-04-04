@@ -97,7 +97,7 @@ public class Stprint : IInstruction {
 //i think this is right?
 public class Debug : IInstruction {
     private readonly int _value;
-    public Debug(int value) {
+    public Debug(int value = 0) {
         _value = value & 0xFFFFFF;  // keep lower 24 bits
     }
     public int Encode() {

@@ -134,9 +134,13 @@ class Assembler{
                     
                     case "pop":
                         Pop pop;
-
                         if(data.Count > 1){
-                            pop = new Pop(UInt32.Parse(data[1]));
+                            int offset = Int32.Parse(data[1]);
+                            if(offset < 0){
+                                Console.WriteLine($"{lines}: offset to pop() is negative.");
+                                return;
+                            }
+                            pop = new Pop((uint)offset);
                             instructions.Add(pop);
                         }else{
                             pop = new Pop();

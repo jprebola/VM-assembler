@@ -181,10 +181,10 @@ public class If : IInstruction {
 
         if(binary){
             output = 0b1000 << 28;
-            return output ^ (conditionCode << 24) ^ (_offset << 2);
+            return output | (conditionCode << 24) | (_offset << 2);
         }else{
             output = 0b1001 << 28;
-            return output ^ (conditionCode << 24) ^ (_offset << 2);
+            return output | (conditionCode << 24) | (_offset << 2);
         }
     }
 }
@@ -207,7 +207,9 @@ public class Print : IInstruction {
                 break;
         }
     }
+
+
     public int Encode() {
-        return (0b1100 << 28) | _offset;
+        return (0b1100 << 28) | (_offset << 2) | _format;
     }  
 }

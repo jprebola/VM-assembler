@@ -227,6 +227,9 @@ public class Print : IInstruction {
             case 'b':
                 _format = 0b10;
                 break;
+            default:
+                _format = 0b00;
+                break;
         }
     }
 

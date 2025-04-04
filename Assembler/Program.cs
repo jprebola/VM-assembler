@@ -212,10 +212,7 @@ class Assembler{
                     
                     //def someone check this
                     case "call":
-                        string label = data[1];
-                        int labelp = labels[label];
-                        int currentp = (int)numInstructions * 4;
-                        Call c = new Call(labelp, currentp);
+                        Call c = new Call(labels[data[1]], (int)numInstructions * 4);
                         instructions.Add(c);    
                         break;
                     
@@ -232,16 +229,24 @@ class Assembler{
                         break;
                     
                     case "goto":
-                        Console.WriteLine("You called: " + data[0]);
+                        Goto go = new Goto(labels[data[1]], (int)numInstructions * 4);
+                        instructions.Add(go);
                         break;
                     
                     case "if":
-                        //Have to handle binary and uniary suffix
-                        Console.WriteLine("You called: " + data[0]);
+                        If cond = new If(data[1], labels[data[2]], (int)numInstructions * 4);
+                        instructions.Add(cond);
                         break;
                     
                     case "dup":
-                        Console.WriteLine("You called: " + data[0]);
+                        Dup dup;
+                        if(data.Count > 1){
+                            dup = new Dup(Int32.Parse(data[1]));
+                            instructions.Add(dup);
+                        }else{
+                            dup = new Dup(0);
+                            instructions.Add(dup);
+                        }
                         break;
                     
                     case "print":
@@ -324,7 +329,7 @@ class Assembler{
         {
             using (var writer = new BinaryWriter(stream))
             {
-                writer.Write(0xDEADBEEF);
+                writer.Write(0xEFBEADDE);
                 foreach(var i in instructions){
                     writer.Write(i.Encode());
                 }

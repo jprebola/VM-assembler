@@ -8,8 +8,7 @@ public class Dup : IInstruction {
     }
     public int Encode() {
         return (0b1100 << 28) | _offset;
-    }
-    
+    }  
 }
 
 public class Push : IInstruction {
@@ -188,4 +187,27 @@ public class If : IInstruction {
             return output ^ (conditionCode << 24) ^ (_offset << 2);
         }
     }
+}
+
+public class Print : IInstruction {
+    private int _offset, _format;
+    public Print(int offset, char fmt) {
+        _offset = offset;
+        switch(fmt) {
+            case 'h':
+                _format = 0b01;
+                break;
+            
+            case 'o':
+                _format = 0b11;
+                break;
+
+            case 'b':
+                _format = 0b10;
+                break;
+        }
+    }
+    public int Encode() {
+        return (0b1100 << 28) | _offset;
+    }  
 }

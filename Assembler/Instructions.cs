@@ -88,10 +88,10 @@ public class Stprint : IInstruction {
 public class Debug : IInstruction {
     private readonly int _value;
     public Debug(int value = 0) {
-        _value = value & 0xFFFFFF;  // ensure val fits in 24 bits
+        _value = value & 0xFFFFFF;  // Ensure value fits in 24 bits
     }
     public int Encode() {
-        return (0b0001 << 28) | _value;  // opcode in bits [31:28], val in bits [23:0]
+        return (0b0000 << 28) | _value;  // Opcode 0 in bits [31:28], value in bits [23:0]
     }
 }
 public class Call : IInstruction {

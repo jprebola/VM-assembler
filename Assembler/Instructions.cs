@@ -49,9 +49,9 @@ public class Swap : IInstruction {
         _from = 4;
         _to = 0;
     }
-    public Swap(int from, int to){
-        _from = from & 0xFFF;
-        _to = to & 0xFFF;
+    public Swap(int f, int t){
+        _from = f;
+        _to = t;
     }
     
     public int Encode() {
@@ -59,6 +59,10 @@ public class Swap : IInstruction {
         int subcode = 0b0001 << 24;
         int fromEncoded = (_from >> 2) & 0xFFF; // 12 bits
         int toEncoded = (_to >> 2) & 0xFFF;
+
+        Console.WriteLine($"_from:{_from} _to:{_to}");
+        Console.WriteLine($"from:{fromEncoded} to:{toEncoded}");
+
         return opcode | subcode | (fromEncoded << 12) | toEncoded;
     }
 }

@@ -91,11 +91,18 @@ class Assembler{
                         instructions.Add(n);
                         break;
                     case "input":
-                        Console.WriteLine("You called: " + data[0]);
+                        Input inp = new Input();
+                        instructions.Add(inp);
                         break;
 
                     case "stinput":
-                        Console.WriteLine("You called: " + data[0]);
+                        if(data.Count > 1){
+                            Stinput sin = new Stinput(Int32.Parse(data[1]));
+                            instructions.Add(sin);
+                        }else{
+                            Stinput sin = new Stinput();
+                            instructions.Add(sin);
+                        }
                         break;
                     
                     case "debug":
@@ -103,51 +110,70 @@ class Assembler{
                         break;
                     
                     case "pop":
-                        Console.WriteLine("You called: " + data[0]);
+                        Pop pop;
+
+                        if(data.Count > 1){
+                            pop = new Pop(UInt32.Parse(data[1]));
+                            instructions.Add(pop);
+                        }else{
+                            pop = new Pop();
+                            instructions.Add(pop);
+                        }
                         break;
                     
                     case "add":
-                        Console.WriteLine("You called: " + data[0]);
+                        Add add = new Add();
+                        instructions.Add(add);
                         break;
                     
                     case "sub":
-                        Console.WriteLine("You called: " + data[0]);
+                        Sub sub = new Sub();
+                        instructions.Add(sub);
                         break;
                     
                     case "mul":
-                        Console.WriteLine("You called: " + data[0]);
+                        Mul mul = new Mul();
+                        instructions.Add(mul);
                         break;
 
                     case "div":
-                        Console.WriteLine("You called: " + data[0]);
+                        Div div = new Div();
+                        instructions.Add(div);
                         break;
                     
                     case "rem":
-                        Console.WriteLine("You called: " + data[0]);
+                        Rem rem = new Rem();
+                        instructions.Add(rem);
                         break;
                     
                     case "and":
-                        Console.WriteLine("You called: " + data[0]);
+                        And and = new And();
+                        instructions.Add(and);
                         break;
                     
                     case "or":
-                        Console.WriteLine("You called: " + data[0]);
+                        Or or = new Or();
+                        instructions.Add(or);
                         break;
                     
                     case "xor":
-                        Console.WriteLine("You called: " + data[0]);
+                        Xor xor = new Xor();
+                        instructions.Add(xor);
                         break;
                     
                     case "lsl":
-                        Console.WriteLine("You called: " + data[0]);
+                        Lsl lsl = new Lsl();
+                        instructions.Add(lsl);
                         break;
                     
                     case "lsr":
-                        Console.WriteLine("You called: " + data[0]);
+                        Lsr lsr = new Lsr();
+                        instructions.Add(lsr);
                         break;
                     
                     case "asr":
-                        Console.WriteLine("You called: " + data[0]);
+                        Asr asr = new Asr();
+                        instructions.Add(asr);
                         break;
                     
                     case "neg":

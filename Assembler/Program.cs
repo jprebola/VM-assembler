@@ -177,15 +177,25 @@ class Assembler{
                         break;
                     
                     case "neg":
-                        Console.WriteLine("You called: " + data[0]);
+                        Neg neg = new Neg();
+                        instructions.Add(neg);
                         break;
                     
                     case "not":
-                        Console.WriteLine("You called: " + data[0]);
+                        Not not = new Not();
+                        instructions.Add(not);
                         break;
                     
                     case "stprint":
-                        Console.WriteLine("You called: " + data[0]);
+                        Stprint stp;
+
+                        if(data.Count > 1){
+                            stp = new Stprint(Int32.Parse(data[1]));
+                            instructions.Add(stp);
+                        }else{
+                            stp = new Stprint(0);
+                            instructions.Add(stp);
+                        }
                         break;
                     
                     case "call":

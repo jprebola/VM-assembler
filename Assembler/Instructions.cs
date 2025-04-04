@@ -50,8 +50,8 @@ public class Swap : IInstruction {
         _to = 0;
     }
     public Swap(int from, int to){
-        _from = from & 0xFF;
-        _to = to & 0xFF;
+        _from = from & 0xFFF;
+        _to = to & 0xFFF;
     }
     
     public int Encode() {

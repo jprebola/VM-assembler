@@ -1,4 +1,4 @@
-public class Dup : IInstruction {
+public class Add : IInstruction {
     private readonly int _tag;
     public Add() {
         _tag = 0;

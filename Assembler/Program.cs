@@ -9,6 +9,10 @@ class Assembler{
     public static void Main(string[] args){
         StreamReader sr;
         string? line;
+        string push_str, tmp, tmp2;
+        int j, str_index;
+        List<string> push_sub_strs;
+        List<int> push_ints;
         List<IInstruction> instructions = new List<IInstruction>();
 
         if(args.Length < 2){
@@ -26,6 +30,9 @@ class Assembler{
         uint lines = 1;
         uint numInstructions = 0;
         Dictionary<string, int> labels = new Dictionary<string, int>();
+
+        push_sub_strs = new List<string>();
+        push_ints = new List<int>();
 
         while((line = sr.ReadLine()) != null){
             List<string> data = line.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -182,6 +189,47 @@ class Assembler{
 
                     case "stpush":
                         Console.WriteLine("You called: " + data[0]);
+                      
+                        /* Get the string. */
+
+                        // TODO: This doesn't parse comments. 
+                        str_index = line.IndexOf("\"");
+                        if (str_index == -1) {
+                            /* TODO: Get the actual error for pushing a string with no quotes. */
+                            Console.WriteLine("Shit's fucked.");
+                            return;
+                        }
+                        tmp = line.Substring(str_index);
+                        tmp2 = replace_escapes(tmp);
+                        push_str = tmp2.Substring(1, tmp2.Length - 2);
+
+
+                        push_sub_strs.Clear();
+                        push_ints.Clear();
+
+                        /* Build our substring list. */
+
+                        for (j = 0; j < push_str.Length; j += 3) {
+                            if ((push_str.Length - j) >= 3) push_sub_strs.Add(push_str.Substring(j, 3));
+                            else push_sub_strs.Add(push_str.Substring(j));
+                        }
+
+                        /* Convert the substrings to ints. */
+                        
+                        for (j = 0; j < push_sub_strs.Count; j++) {
+                            if (j == push_sub_strs.Count - 1) push_ints.Add( substr_to_int(push_sub_strs[j], true) );
+                            else push_ints.Add( substr_to_int(push_sub_strs[j], false) );
+                        }
+
+                        /* TODO: Debug, remove this. */
+                        Console.WriteLine(push_str);
+
+                        /* Create the push instructions. */
+
+                        for (j = push_ints.Count - 1; j != 0; j--) {
+                            /* TODO: this. */
+                        }
+
                         break;
 
                     default:
@@ -213,7 +261,55 @@ class Assembler{
             }
         }
     }
-}
 
+    /* Convert a substring into an int value for stpush. */
+    public static int substr_to_int(string s, bool done) {
+        int n;
+        int last, len;
+
+        len = s.Length;
+
+        if (len > 3 || len == 0) throw new ArgumentOutOfRangeException("substr_to_int failed: s wasn't the correct size.");
+
+        n = 0;
+        last = (done) ? 0 : 1;
+        n |= (int) s[0];
+        if (len > 1) n |= ((int) s[1] << 8);
+        if (len > 2) n |= ((int) s[2] << 16);
+        n |= (last << 24);
+
+        return n;
+    }
+
+    /* Converts escapes into their actual characters. */ 
+    public static string replace_escapes(string s) {
+        string esc;
+        int i;
+
+        esc = "";
+
+        for (i = 0; i < s.Length; i++) {
+            if (s[i] == '\\' && i + 1 < s.Length) {
+                switch (s[i + 1]) {
+                    case 'n':
+                        esc += '\n';
+                        break;
+                    case '"':
+                        esc += '\"';
+                        break;
+                    case '\\':
+                        esc += '\\';
+                        break;
+                }
+                i++;
+            }
+            else {
+                esc += s[i];
+            }
+        }
+
+        return esc;
+    }
+}
 
 

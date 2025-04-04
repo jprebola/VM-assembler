@@ -359,6 +359,14 @@ class Assembler{
             //get string length to calc # of pushes needed for PC and IInstruction list   
             lines++;     
         }
+
+        if(instructions.Count % 4 != 0){
+            int count = 4 - (instructions.Count % 4);
+            for(int i = 0; i < count; i++){
+                Nop padding = new Nop();
+                instructions.Add(padding);
+            }
+        }
         
 
         using (var stream = File.Open(args[1], FileMode.Create))
@@ -371,10 +379,11 @@ class Assembler{
                 }
 
                 // always pad to next multiple of 4 instructions
+                /*
                 int nop = (0b0000 << 28) | (0b0010 << 24);
                 for(int i = 0; i < 4 - (instructions.Count % 4); i++){
                     writer.Write(nop);
-                }
+                }*/
             }
         }
     }

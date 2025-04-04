@@ -60,9 +60,6 @@ public class Swap : IInstruction {
         int fromEncoded = (_from >> 2) & 0xFFF; // 12 bits
         int toEncoded = (_to >> 2) & 0xFFF;
 
-        Console.WriteLine($"_from:{_from} _to:{_to}");
-        Console.WriteLine($"from:{fromEncoded} to:{toEncoded}");
-
         return opcode | subcode | (fromEncoded << 12) | toEncoded;
     }
 }

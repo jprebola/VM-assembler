@@ -11,7 +11,7 @@
   [x]   Binary Arithmetic Instructions (opcode=2)
   [x]   Unary Arithmetic Instructions (opcode=3)
   [x]   String Print Instructions (opcode=4)
-  [x]   Call Instructions (opcode=5)
+  [x]   Call Instructions (opcode=5) *start here cheyenne
   [x]   Return Instructions (opcode=6)
   [X]   Unconditional Goto Instructions (opcode=7)
   [X]   Binary If Instructions (opcode=8)

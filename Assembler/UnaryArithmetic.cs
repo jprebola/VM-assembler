@@ -4,7 +4,7 @@ public class Neg : IInstruction {
         _tag = 0;
     }
     public int Encode() {
-        return (0b0011 << 28) | _tag;
+        return (0b0011 << 28) | (_tag << 24);
     }
 }
 
@@ -14,7 +14,7 @@ public class Not : IInstruction {
         _tag = 1;
     }
     public int Encode() {
-        return (0b0011 << 28) | _tag;
+        return (0b0011 << 28) | (_tag << 24);
     }
 }
 

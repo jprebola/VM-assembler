@@ -86,12 +86,12 @@ public class Stprint : IInstruction {
 }
 
 public class Call : IInstruction {
-    private readonly int _offset;
-    public Call(int offset){
-        _offset = offset;
+    private int _offset;
+    public Call(int labelPos, int currentPos){
+        _offset = labelPos - currentPos;
     }
     public int Encode(){
-        return (0b0101 << 28) | (_offset & ~0b11);
+        return (0b0101 << 28) | (_offset << 2);
     }
 }
 
@@ -107,11 +107,11 @@ public class Return : IInstruction {
 
 public class Goto : IInstruction {
     private readonly int _reloffset;
-    public Goto(int reloffset){
-        _reloffset = reloffset & ~0b11;
+    public Goto(int labelPos, int currentPos){
+        _reloffset = (labelPos - currentPos);
     }
     public int Encode(){
-        return (0b0111 << 28) | (_reloffset & 0x0FFFFFFF);
+        return (0b0111 << 28) | (_reloffset << 2);
     }
 }
 

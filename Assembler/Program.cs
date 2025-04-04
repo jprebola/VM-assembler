@@ -53,7 +53,10 @@ class Assembler{
                     break;
                 }
             }
-            //DONT FUCKING FORGET HANDLING STPUSH W/ numInstructions
+
+            //handle cases
+            data[0].ToLower();
+            
 
             if(data.Count > 0 && data[0].StartsWith("if")){
                  data[0].Remove(0, 2);

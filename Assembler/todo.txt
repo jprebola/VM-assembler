@@ -1,9 +1,9 @@
  = + = TODO = + =
 
         Miscellaneous Instructions (opcode=0)
-  [x]       Exit Instruction
+  [x]       Exit Instruction 
   [x]       Swap Instruction
-  [x]       No Operation Instruction
+  [x]       No Operation Instruction *
   [x]       Input Instruction
   [X]       String Input Instruction
   [ ]       Debug Instruction
@@ -22,3 +22,8 @@
   [X]   Push Instructions (opcode=15)
   [x]       Push Instruction
   [x]       String Push Instruction
+
+
+fix negative offset shifting
+fix other instruction bugs
+fix error messages for invaild operands

@@ -61,8 +61,10 @@ class Assembler{
              }
  
              if(data.Count > 0 && data[0].StartsWith("print") && data[0].Length > 5){
-                 data[0].Remove(0, 2);
+                 data[0].Remove(0, 5);
                  data.Insert(0, "print");
+             }else{
+                data.Insert(1, "d");
              }
 
             //if we are parsing an instruction then increase instruction counter
@@ -251,7 +253,27 @@ class Assembler{
                     
                     case "print":
                     //Have to handle print suffix
-                        Console.WriteLine("You called: " + data[0]);
+                        Print pr;
+
+                        if(data.Count > 2){
+                            int offset;
+
+                            if (data[2].StartsWith("0x", StringComparison.OrdinalIgnoreCase))
+                            {
+                                // Parse as hexadecimal (skip the "0x")
+                                offset = Convert.ToInt32(data[2].Substring(2), 16);
+                                pr = new Print(offset, (char) data[1].ElementAt(0));
+                                instructions.Add(pr);
+                            }else {
+                                // Parse as decimal
+                                offset = Convert.ToInt32(data[2], 10);
+                                pr = new Print(offset, (char) data[1].ElementAt(0));
+                                instructions.Add(pr);
+                            }
+                        }else{
+                            pr = new Print(0, (char) data[1].ElementAt(0));
+                            instructions.Add(pr);
+                        }
                         break;
                     
                     case "dump":
@@ -260,11 +282,18 @@ class Assembler{
                         break;  
                     
                     case "push":
-                        Console.WriteLine("You called: " + data[0]);
+                        Push push;
+
+                        if(data.Count > 1){
+                            push = new Push(Int32.Parse(data[1]));
+                            instructions.Add(push);
+                        }else{
+                            push = new Push(0);
+                            instructions.Add(push);
+                        }
                         break;
 
                     case "stpush":
-                        Console.WriteLine("You called: " + data[0]);
                       
                         /* Parse the string. */
 

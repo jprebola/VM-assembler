@@ -63,7 +63,7 @@ class Assembler{
              if(data.Count > 0 && data[0].StartsWith("print") && data[0].Length > 5){
                  data[0].Remove(0, 5);
                  data.Insert(0, "print");
-             }else if (data[0].StartsWith("print")){
+             }else if (data.Count > 0 && data[0].StartsWith("print")){
                 if(data.Count > 1){
                     data.Insert(1, "d");
                 }else{

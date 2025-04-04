@@ -9,8 +9,8 @@ class Assembler{
     public static void Main(string[] args){
         StreamReader sr;
         string? line;
-        string push_str, tmp, tmp2;
-        int j, str_index;
+        string push_str, tmp;
+        int j, str_start, str_end, comment_index;
         List<string> push_sub_strs;
         List<int> push_ints;
         List<IInstruction> instructions = new List<IInstruction>();
@@ -190,24 +190,31 @@ class Assembler{
                     case "stpush":
                         Console.WriteLine("You called: " + data[0]);
                       
-                        /* Get the string. */
+                        /* Parse the string. */
 
-                        // TODO: This doesn't parse comments. 
-                        str_index = line.IndexOf("\"");
-                        if (str_index == -1) {
+                        /* Comments. */ 
+                        comment_index = line.IndexOf("#");
+                        if (comment_index != -1) {
+                            tmp = line.Substring(0, comment_index);
+                            //Console.WriteLine($"DEBUG: {tmp}");
+                        }
+
+                        /* Remove the quotes. */
+                        str_start = line.IndexOf("\"");
+                        str_end = line.LastIndexOf("\"");
+
+                        if (str_start == -1 || str_start == str_end) {
                             /* TODO: Get the actual error for pushing a string with no quotes. */
-                            Console.WriteLine("Shit's fucked.");
+                            Console.WriteLine("Bad stpush.");
                             return;
                         }
-                        tmp = line.Substring(str_index);
-                        tmp2 = replace_escapes(tmp);
-                        push_str = tmp2.Substring(1, tmp2.Length - 2);
 
-
-                        push_sub_strs.Clear();
-                        push_ints.Clear();
+                        tmp = line.Substring(str_start + 1, (str_end - str_start - 1));
+                        push_str = replace_escapes(tmp);
 
                         /* Build our substring list. */
+                        push_sub_strs.Clear();
+                        push_ints.Clear();
 
                         for (j = 0; j < push_str.Length; j += 3) {
                             if ((push_str.Length - j) >= 3) push_sub_strs.Add(push_str.Substring(j, 3));
@@ -215,14 +222,13 @@ class Assembler{
                         }
 
                         /* Convert the substrings to ints. */
-                        
                         for (j = 0; j < push_sub_strs.Count; j++) {
                             if (j == push_sub_strs.Count - 1) push_ints.Add( substr_to_int(push_sub_strs[j], true) );
                             else push_ints.Add( substr_to_int(push_sub_strs[j], false) );
                         }
 
                         /* TODO: Debug, remove this. */
-                        Console.WriteLine(push_str);
+                        Console.WriteLine($"The string being pushed: {push_str}");
 
                         /* Create the push instructions. */
 

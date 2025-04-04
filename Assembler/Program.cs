@@ -243,8 +243,8 @@ class Assembler{
                         break;
                     
                     case "dump":
-                        Dump d = new Dump();
-                        instructions.Add(d);
+                        Dump dmp = new Dump();
+                        instructions.Add(dmp);
                         break;  
                     
                     case "push":

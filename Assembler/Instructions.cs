@@ -25,7 +25,7 @@ public class Push : IInstruction {
 
 public class Pop : IInstruction {
     private readonly long _offset;
-    public Pop(uint offset){
+    public Pop(uint offset = 4){
         _offset = (uint)(offset & ~0b11);
     }
     public int Encode(){

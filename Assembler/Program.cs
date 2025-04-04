@@ -334,11 +334,10 @@ class Assembler{
                     writer.Write(i.Encode());
                 }
 
-                if(instructions.Count % 4 != 0){
-                    int nop = (0b0 << 31) & (0b1 << 25);
-                    for(int i = 0; i < 4 - (instructions.Count % 4); i++){
-                        writer.Write(nop);
-                    }
+                // always pad to next multiple of 4 instructions
+                int nop = (0b0000 << 28) | (0b0010 << 24);
+                for(int i = 0; i < 4 - (instructions.Count % 4); i++){
+                    writer.Write(nop);
                 }
             }
         }

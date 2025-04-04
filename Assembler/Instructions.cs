@@ -36,7 +36,7 @@ public class Pop : IInstruction {
 public class Exit : IInstruction {
     private readonly int _code;
     public Exit(int code){
-        _code = code & 0xF;
+        _code = code & 0xFF;
     }
     public int Encode(){
         return (0b0000 << 28) | _code; // i may have fucked this up shrug -- i think it's right CH 

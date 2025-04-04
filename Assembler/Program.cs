@@ -69,17 +69,26 @@ class Assembler{
             if(isInstruction && data.Count > 0){
                 //add instruction to IInstruction list
                 //TODO: this switch only checks for if and print. we need to handle to suffix of these functions somehow
+            
                 switch(data[0]){
                     case "exit":
-                        Console.WriteLine("You called: " + data[0]);
+                        Exit ex = new Exit(Int32.Parse(data[1]));
+                        instructions.Add(ex);
                         break;
 
                     case "swap":
-                        Console.WriteLine("You called: " + data[0]);
+                        Swap sw;
+                        if(data.Count > 2){
+                            sw = new Swap(Int32.Parse(data[1]), Int32.Parse(data[2]));
+                        }else{
+                            sw = new Swap();
+                        }
+                        instructions.Add(sw);
                         break;
                     
                     case "nop":
-                        Console.WriteLine("You called: " + data[0]);
+                        Nop n = new Nop();
+                        instructions.Add(n);
                         break;
                     case "input":
                         Console.WriteLine("You called: " + data[0]);

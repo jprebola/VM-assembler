@@ -1,3 +1,6 @@
+using System.Runtime.InteropServices;
+using System.Xml;
+
 public class Dup : IInstruction {
     private readonly int _offset;
     public Dup(int offset) {
@@ -22,7 +25,7 @@ public class Push : IInstruction {
 }
 
 public class Pop : IInstruction {
-    private readonly uint _offset;
+    private readonly long _offset;
     public Pop(uint offset){
         _offset = offset & ~0b11;
     }
@@ -85,5 +88,73 @@ public class Dump : IInstruction {
     public Dump() {}
     public int Encode(){
         return 0b110 << 28;
+    }
+}
+
+public class If : IInstruction {
+    private readonly string _suffix;
+    private readonly int _offset;
+
+    public If(string suffix, int labelPos, int line){
+        _suffix = suffix;
+        _offset = labelPos - line;
+    }
+    public int Encode(){
+        bool binary = true;
+        int conditionCode = 0b0, output;
+
+        switch(_suffix){
+            case "eq":
+                conditionCode = 0b000;
+                break;
+            
+            case "ne":
+                conditionCode = 0b001;
+                break;
+            
+            case "lt":
+                conditionCode = 0b010;
+                break;
+            
+            case "gt":
+                conditionCode = 0b011;
+                break;
+            
+            case "le":
+                conditionCode = 0b100;
+                break;
+            
+            case "ge":
+                conditionCode = 0b101;
+                break;
+            
+            case "ez":
+                conditionCode = 0b00;
+                binary = false;
+                break;
+            
+            case "nz":
+                conditionCode = 0b01;
+                binary = false;
+                break;
+            
+            case "mi":
+                conditionCode = 0b10;
+                binary = false;
+                break;
+            
+            case "pl":
+                conditionCode = 0b11;
+                binary = false;
+                break;
+        }
+
+        if(binary){
+            output = 0b1000 << 28;
+            return output ^ (conditionCode << 24) ^ (_offset << 2);
+        }else{
+            output = 0b1001 << 28;
+            return output ^ (conditionCode << 24) ^ (_offset << 2);
+        }
     }
 }

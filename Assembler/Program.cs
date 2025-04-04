@@ -25,7 +25,7 @@ class Assembler{
 
         uint lines = 1;
         uint numInstructions = 0;
-        Dictionary<string, (int, int)> labels = new Dictionary<string, (int, int)>();
+        Dictionary<string, int> labels = new Dictionary<string, int>();
 
         while((line = sr.ReadLine()) != null){
             List<string> data = line.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -35,7 +35,7 @@ class Assembler{
             if(data.Count == 1 && data[0].Contains(':')){
                 //remove ':' from the name and store label info in dictionary
                 data[0].Remove(data[0].Length - 1, 1);
-                labels[data[0]] = ((int)lines, (int)numInstructions * 4);
+                labels[data[0]] = (int)numInstructions * 4;
                 isInstruction = false;
             }
 
@@ -190,7 +190,7 @@ class Assembler{
                 }
                 numInstructions++;
             }
-                //get string length to calc # of pushes needed for PC and IInstruction list   
+            //get string length to calc # of pushes needed for PC and IInstruction list   
             lines++;     
         }
         

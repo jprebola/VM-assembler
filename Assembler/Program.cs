@@ -64,7 +64,11 @@ class Assembler{
                  data[0].Remove(0, 5);
                  data.Insert(0, "print");
              }else{
-                data.Insert(1, "d");
+                if(data.Count > 1){
+                    data.Insert(1, "d");
+                }else{
+                    data.Add("d");
+                }
              }
 
             //if we are parsing an instruction then increase instruction counter

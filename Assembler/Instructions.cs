@@ -74,6 +74,17 @@ public class Input : IInstruction {
     }
 }
 
+public class Stinput : IInstruction {
+    private int _maxChars;
+    public Stinput(int size = 0x00FF_FFFF){
+        _maxChars = size;
+    }
+
+    public int Encode() {
+        return (0b00000101 << 24) | (_maxChars);
+    }
+}
+
 public class Stprint : IInstruction {
     private readonly int _offset;
     public Stprint(int offset){

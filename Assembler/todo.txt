@@ -5,7 +5,7 @@
   [x]       Swap Instruction
   [x]       No Operation Instruction
   [x]       Input Instruction
-  [ ]       String Input Instruction
+  [X]       String Input Instruction
   [ ]       Debug Instruction
   [x]   Pop Instructions (opcode=1)
   [x]   Binary Arithmetic Instructions (opcode=2)
@@ -17,7 +17,7 @@
   [X]   Binary If Instructions (opcode=8)
   [X]   Unary If Instructions (opcode=9)
   [x]   Dup Instructions (opcode=12)
-  [ ]   Print Instructions (opcode=13)
+  [X]   Print Instructions (opcode=13)
   [X]   Dump Instructions (opcode=14)
   [X]   Push Instructions (opcode=15)
   [x]       Push Instruction

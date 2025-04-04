@@ -220,8 +220,15 @@ class Assembler{
                         break;
                     
                     case "return":
-                        Return r = new Return(Int32.Parse(data[1]));
-                        instructions.Add(r);
+                        Return r;
+
+                        if(data.Count > 1){
+                            r = new Return(Int32.Parse(data[1]));
+                            instructions.Add(r);
+                        }else{
+                            r = new Return(0);
+                            instructions.Add(r);
+                        }
                         break;
                     
                     case "goto":

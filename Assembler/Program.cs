@@ -83,7 +83,9 @@ class Assembler{
             
                 switch(data[0]){
                     case "exit":
-                        Exit ex = new Exit(Int32.Parse(data[1]));
+                        int check = Int32.Parse(data[1]);
+                        if(check > 255) Console.WriteLine($"{lines}: exit code would be truncated");
+                        Exit ex = new Exit(check);
                         instructions.Add(ex);
                         break;
 

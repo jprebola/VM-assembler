@@ -21,4 +21,4 @@
   [X]   Dump Instructions (opcode=14)
   [X]   Push Instructions (opcode=15)
   [x]       Push Instruction
-  [ ]       String Push Instruction
+  [x]       String Push Instruction

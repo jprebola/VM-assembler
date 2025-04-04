@@ -55,7 +55,9 @@ class Assembler{
             }
 
             //handle cases
-            data[0].ToLower();
+            if(data.Count > 0){
+                data[0] = data[0].ToLower();
+            }
             
 
             if(data.Count > 0 && data[0].StartsWith("if")){

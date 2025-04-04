@@ -24,7 +24,7 @@ public class Push : IInstruction {
 public class Pop : IInstruction {
     private readonly uint _offset;
     public Pop(uint offset){
-        _offset = offset & ~0b11;
+        _offset = (uint)(offset & ~0b11);
     }
     public int Encode(){
         return (1 << 28) | ((int)_offset & 0x0FFFFFFF);
@@ -37,7 +37,38 @@ public class Exit : IInstruction {
         _code = code & 0xF;
     }
     public int Encode(){
-        return (0b0 << 30) | _code;
+        return (0b0000 << 28) | _code; // i may have fucked this up shrug
+    }
+}
+public class Swap : IInstruction {
+    private readonly int _from;
+    private readonly int _to;
+    public Swap(){
+        _from = 4;
+        _to = 0;
+    }
+    public Swap(int from, int to){
+        _from = from & 0xFF;
+        _to = to & 0xFF;
+    }
+    
+    public int Encode() {
+        int opcode = 0b0000 << 28;
+        int subcode = 0b0001 << 24;
+        int fromEncoded = (_from >> 2) & 0xFFF; // 12 bits
+        int toEncoded = (_to >> 2) & 0xFFF;
+        return opcode | subcode | (fromEncoded << 12) | toEncoded;
+    }
+}
+
+public class Nop : IInstruction {
+    public int Encode() {
+        return (0b0000 << 28) | (0b0010 << 24);
+    }
+}
+public class Input : IInstruction {
+    public int Encode() {
+        return (0b0000 << 28) | (0b0100 << 24);
     }
 }
 

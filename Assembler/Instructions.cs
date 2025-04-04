@@ -40,7 +40,7 @@ public class Exit : IInstruction {
         _code = code & 0xF;
     }
     public int Encode(){
-        return (0b0000 << 28) | _code; // i may have fucked this up shrug
+        return (0b0000 << 28) | _code; // i may have fucked this up shrug -- i think it's right CH 
     }
 }
 public class Swap : IInstruction {

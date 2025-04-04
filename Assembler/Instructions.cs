@@ -87,11 +87,13 @@ public class Stprint : IInstruction {
 //i think this is right?
 public class Debug : IInstruction {
     private readonly int _value;
-    public Debug(int value = 0) {
-        _value = value & 0xFFFFFF;  // Ensure value fits in 24 bits
+    public Debug(int value) {
+        _value = value & 0xFFFFFF;  // keep lower 24 bits
     }
     public int Encode() {
-        return (0b0000 << 28) | _value;  // Opcode 0 in bits [31:28], value in bits [23:0]
+        int opcode = 0b0000 << 28;
+        int subcode = 0b1111 << 24;
+        return opcode | subcode | _value; 
     }
 }
 public class Call : IInstruction {

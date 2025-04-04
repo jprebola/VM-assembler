@@ -106,7 +106,19 @@ class Assembler{
                         break;
                     
                     case "debug":
-                        Console.WriteLine("You called: " + data[0]);
+                        int val = 0;
+                        if(data.Count > 1){
+                            string str = data[1];
+                            try{
+                                val = str.StartsWith("0x") ? Convert.ToInt32(str, 16) : Int32.Parse(str);
+                            }
+                            catch(Exception e){
+                                Console.WriteLine("Error parsing debug value: " + e.Message);
+                                return;
+                            }
+                        }
+                        Debug d = new Debug(val);
+                        instructions.Add(d);
                         break;
                     
                     case "pop":
@@ -188,12 +200,18 @@ class Assembler{
                         Console.WriteLine("You called: " + data[0]);
                         break;
                     
+                    //def someone check this
                     case "call":
-                        Console.WriteLine("You called: " + data[0]);
+                        string label = data[1];
+                        int labelp = labels[label];
+                        int currentp = (int)numInstructions * 4;
+                        Call c = new Call(labelp, currentp);
+                        instructions.Add(c);    
                         break;
                     
                     case "return":
-                        Console.WriteLine("You called: " + data[0]);
+                        Return r = new Return(Int32.Parse(data[1]));
+                        instructions.Add(r);
                         break;
                     
                     case "goto":
@@ -215,8 +233,9 @@ class Assembler{
                         break;
                     
                     case "dump":
-                        Console.WriteLine("You called: " + data[0]);
-                        break;
+                        Dump d = new Dump();
+                        instructions.Add(d);
+                        break;  
                     
                     case "push":
                         Console.WriteLine("You called: " + data[0]);

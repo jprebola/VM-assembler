@@ -94,7 +94,16 @@ public class Stprint : IInstruction {
         return (0b0100 << 28) | (_offset & ~0b11);
     }
 }
-
+//i think this is right?
+public class Debug : IInstruction {
+    private readonly int _value;
+    public Debug(int value = 0) {
+        _value = value & 0xFFFFFF;  // ensure val fits in 24 bits
+    }
+    public int Encode() {
+        return (0b0001 << 28) | _value;  // opcode in bits [31:28], val in bits [23:0]
+    }
+}
 public class Call : IInstruction {
     private int _offset;
     public Call(int labelPos, int currentPos){

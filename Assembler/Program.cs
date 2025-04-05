@@ -69,7 +69,7 @@ class Assembler{
                 }
             }
 
-            //handle cases
+            //handle instruction letter cases
             if(data.Count > 0){
                 data[0] = data[0].ToLower();
             }

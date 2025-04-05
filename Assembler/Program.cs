@@ -78,15 +78,35 @@ class Assembler{
             
 
             if(data.Count > 0 && data[0].StartsWith("if")){
-                try{
-                    string getIf = data[0].Substring(0, 2);
-                    string suf = data[0].Substring(2, 2);
-                    data.RemoveAt(0);
-                    data.Insert(0, suf);
-                    data.Insert(0, getIf);
-                }catch (Exception e){
-                    Console.WriteLine(e);
+                string ifSuffix;
+                if(data[0].Contains("eq")){
+                    ifSuffix = "eq";
+                }else if(data[0].Contains("ne")){
+                    ifSuffix = "ne";
+                }else if(data[0].Contains("lt")){
+                    ifSuffix = "lt";
+                }else if(data[0].Contains("gt")){
+                    ifSuffix = "gt";
+                }else if(data[0].Contains("le")){
+                    ifSuffix = "le";
+                }else if(data[0].Contains("ge")){
+                    ifSuffix = "ge";
+                }else if(data[0].Contains("ez")){
+                    ifSuffix = "ez";
+                }else if(data[0].Contains("nz")){
+                    ifSuffix = "nz";
+                }else if(data[0].Contains("mi")){
+                    ifSuffix = "mi";
+                }else if(data[0].Contains("pl")){
+                    ifSuffix = "pl";
+                }else{
+                    Console.WriteLine($"{lines}: Error parsing if");
+                    return;
                 }
+
+                data.RemoveAt(0);
+                data.Insert(0, ifSuffix);
+                data.Insert(0, "if");
             }
  
              if(data.Count > 0 && data[0].StartsWith("print")){

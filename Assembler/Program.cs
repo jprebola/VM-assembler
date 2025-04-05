@@ -271,7 +271,7 @@ class Assembler{
                         break;
                     
                     case "goto":
-                        Console.WriteLine($"labels[label] = {labels[data[1]]}" );
+                        //Console.WriteLine($"labels[label] = {labels[data[1]]}" );
                         Goto go = new Goto(labels[data[1]], (int)numInstructions * 4);
                         instructions.Add(go);
                         break;

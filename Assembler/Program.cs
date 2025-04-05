@@ -397,7 +397,9 @@ class Assembler{
                             /* TODO: this. */
 
                             /* Debug. */ 
-                            Console.WriteLine($"{push_sub_strs[j]} // {push_ints[j]}");
+                            //Console.WriteLine($"{push_sub_strs[j]} // {push_ints[j]}");
+                            Push stPush = new Push(push_ints[j]);
+                            instructions.Add(stPush);
                         }
 
                         break;
@@ -412,6 +414,7 @@ class Assembler{
             lines++;     
         }
 
+        //pad to 4 instructions
         if(instructions.Count % 4 != 0){
             int count = 4 - (instructions.Count % 4);
             for(int i = 0; i < count; i++){
@@ -420,7 +423,7 @@ class Assembler{
             }
         }
         
-
+        //write to the file
         using (var stream = File.Open(args[1], FileMode.Create))
         {
             using (var writer = new BinaryWriter(stream))

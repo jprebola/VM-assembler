@@ -110,7 +110,7 @@ public class Debug : IInstruction {
 public class Call : IInstruction {
     private int _offset;
     public Call(int labelPos, int currentPos){
-        _offset = (labelPos - currentPos) >> 2;  //divide by 4 for instruction addresses
+        _offset = (labelPos - currentPos);  //divide by 4 for instruction addresses
     }
     public int Encode(){
         return (0b0101 << 28) | (_offset & 0x0FFFFFFF);  //mask to keep only 28 bits

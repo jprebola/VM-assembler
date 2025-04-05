@@ -281,8 +281,18 @@ class Assembler{
                     case "dup":
                         Dup dup;
                         if(data.Count > 1){
-                            dup = new Dup(Int32.Parse(data[1]));
-                            instructions.Add(dup);
+                            int offset;
+                            if(data[1].StartsWith("0x") || data[1].StartsWith("0X")){
+                                //parse as hex
+                                offset = Convert.ToInt32(data[1].Substring(2), 16);
+                                dup = new Dup(offset);
+                                instructions.Add(dup);
+                            } else {
+                                //parse as decimal
+                                offset = Int32.Parse(data[1]);
+                                dup = new Dup(offset);
+                                instructions.Add(dup);
+                            }
                         }else{
                             dup = new Dup(0);
                             instructions.Add(dup);

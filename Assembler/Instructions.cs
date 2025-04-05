@@ -140,7 +140,7 @@ public class Goto : IInstruction {
 public class Dump : IInstruction {
     public Dump() {}
     public int Encode(){
-        return 0b110 << 28;
+        return 0b1110 << 28;
     }
 }
 

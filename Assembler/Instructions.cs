@@ -182,22 +182,22 @@ public class If : IInstruction {
                 break;
             
             case "ez":
-                conditionCode = 0b00;
+                conditionCode = 0b000;
                 binary = false;
                 break;
             
             case "nz":
-                conditionCode = 0b01;
+                conditionCode = 0b001;
                 binary = false;
                 break;
             
             case "mi":
-                conditionCode = 0b10;
+                conditionCode = 0b010;
                 binary = false;
                 break;
             
             case "pl":
-                conditionCode = 0b11;
+                conditionCode = 0b011;
                 binary = false;
                 break;
         }

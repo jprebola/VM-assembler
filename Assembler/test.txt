@@ -1,4 +1,4 @@
 main:
-    ifeq ex
+    ifez ex
 ex:
     exit 1

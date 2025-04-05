@@ -366,8 +366,11 @@ class Assembler{
 
                         /* Create the push instructions. */
 
-                        for (j = push_ints.Count - 1; j != 0; j--) {
+                        for (j = push_ints.Count - 1; j >= 0; j--) {
                             /* TODO: this. */
+
+                            /* Debug. */ 
+                            Console.WriteLine($"{push_sub_strs[j]} // {push_ints[j]}");
                         }
 
                         break;

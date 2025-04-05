@@ -78,19 +78,32 @@ class Assembler{
             
 
             if(data.Count > 0 && data[0].StartsWith("if")){
-                 data[0].Remove(0, 2);
-                 data.Insert(0, "if");
-             }
- 
-             if(data.Count > 0 && data[0].StartsWith("print") && data[0].Length > 5){
-                 data[0].Remove(0, 5);
-                 data.Insert(0, "print");
-             }else if (data.Count > 0 && data[0].StartsWith("print")){
-                if(data.Count > 1){
-                    data.Insert(1, "d");
-                }else{
-                    data.Add("d");
+                try{
+                    string getIf = data[0].Substring(0, 2);
+                    string suf = data[0].Substring(2, 2);
+                    data.RemoveAt(0);
+                    data.Insert(0, suf);
+                    data.Insert(0, getIf);
+                }catch (Exception e){
+                    Console.WriteLine(e);
                 }
+            }
+ 
+             if(data.Count > 0 && data[0].StartsWith("print")){
+                string printSuffix;
+                if(data[0].Contains('h')){
+                    printSuffix = "h";
+                }else if(data[0].Contains('o')){
+                    printSuffix = "o";
+                }else if(data[0].Contains('b')){
+                    printSuffix = "b";
+                }else{
+                    printSuffix = "d";
+                }
+
+                 data.RemoveAt(0);
+                 data.Insert(0, printSuffix);
+                 data.Insert(0, "print");
              }
 
             //if we are parsing an instruction then increase instruction counter

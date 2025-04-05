@@ -27,6 +27,8 @@ class Assembler{
             return;
         }
 
+        
+
         uint lines = 1;
         uint numInstructions = 0;
         Dictionary<string, int> labels = new Dictionary<string, int>();
@@ -34,16 +36,29 @@ class Assembler{
         push_sub_strs = new List<string>();
         push_ints = new List<int>();
 
+        //first pass
         while((line = sr.ReadLine()) != null){
             List<string> data = line.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
-            bool isInstruction = true;
-            
-            //check for label
             if(data.Count == 1 && data[0].Contains(':')){
                 //remove ':' from the name and store label info in dictionary
                 data[0].Remove(data[0].Length - 1, 1);
                 labels[data[0]] = (int)numInstructions * 4;
-                isInstruction = false;
+            }
+        }
+
+        // Reset stream for second pass
+        sr.BaseStream.Seek(0, SeekOrigin.Begin);
+        sr.DiscardBufferedData();
+
+        //second pass
+        while((line = sr.ReadLine()) != null){
+            List<string> data = line.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
+            //bool isInstruction = true;
+            
+            
+            //check for label
+            if(data.Count == 1 && data[0].Contains(':')){
+                continue;
             }
 
             //Check for comment
@@ -77,7 +92,7 @@ class Assembler{
              }
 
             //if we are parsing an instruction then increase instruction counter
-            if(isInstruction && data.Count > 0){
+            if(data.Count > 0){
                 //add instruction to IInstruction list
                 //TODO: this switch only checks for if and print. we need to handle to suffix of these functions somehow
             

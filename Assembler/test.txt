@@ -1,3 +1,4 @@
 main:
-    swap    
-    swap -4
+    ifeq ex
+ex:
+    exit 1

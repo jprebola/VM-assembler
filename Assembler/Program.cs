@@ -40,9 +40,11 @@ class Assembler{
         while((line = sr.ReadLine()) != null){
             List<string> data = line.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
             if(data.Count == 1 && data[0].Contains(':')){
-                //remove ':' from the name and store label info in dictionary
-                data[0].Remove(data[0].Length - 1, 1);
-                labels[data[0]] = (int)numInstructions * 4;
+                string labelName = data[0].Substring(0, data[0].Length - 1);
+                labels[labelName] = (int)numInstructions * 4;
+            }
+            else if(data.Count > 0 && !data[0].StartsWith("#")){
+                numInstructions++;
             }
         }
 

@@ -133,7 +133,7 @@ public class Goto : IInstruction {
         _reloffset = (labelPos - currentPos);
     }
     public int Encode(){
-        return (0b0111 << 28) | (_reloffset << 2);
+        return (0b0111 << 28) | (_reloffset);
     }
 }
 

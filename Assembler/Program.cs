@@ -30,6 +30,7 @@ class Assembler{
         
 
         uint lines = 1;
+        uint labelPos = 0;
         uint numInstructions = 0;
         Dictionary<string, int> labels = new Dictionary<string, int>();
 
@@ -41,10 +42,9 @@ class Assembler{
             List<string> data = line.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
             if(data.Count == 1 && data[0].Contains(':')){
                 string labelName = data[0].Substring(0, data[0].Length - 1);
-                labels[labelName] = (int)numInstructions * 4;
-            }
-            else if(data.Count > 0 && !data[0].StartsWith("#")){
-                numInstructions++;
+                labels[labelName] = (int)labelPos * 4;
+            }else if (data.Count > 0 && !data[0].StartsWith("#")){
+                labelPos++;
             }
         }
 
@@ -271,6 +271,7 @@ class Assembler{
                         break;
                     
                     case "goto":
+                        Console.WriteLine($"labels[label] = {labels[data[1]]}" );
                         Goto go = new Goto(labels[data[1]], (int)numInstructions * 4);
                         instructions.Add(go);
                         break;

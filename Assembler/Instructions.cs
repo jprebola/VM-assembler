@@ -236,6 +236,6 @@ public class Print : IInstruction {
 
 
     public int Encode() {
-        return (0b1100 << 28) | (_offset << 2) | _format;
-    }  
+        return (0b1101 << 28) | (_offset) | _format;
+    }
 }
